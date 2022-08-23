@@ -1,0 +1,99 @@
+.registerContainer {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 600px;
+    height: 300px;
+    background: #E6EEFF;
+    border-radius: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+    .registerContainer {
+        width: 100%;
+    }
+}
+
+.loginInput {
+    width: 500px;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #B6C2E2;
+    border-radius: 6px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    text-indent: 30px;
+}
+
+.inputLabel {
+    text-align: left;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 100%;
+    left: 55px;
+    top: 12px;
+}
+
+@media only screen and (max-width: 600px) {
+    .inputLabel {
+        text-align: center;
+        left: 0;
+    }
+}
+
+.passwordInput {
+    width: 500px;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #B6C2E2;
+    border-radius: 6px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    text-indent: 30px;
+}
+
+.registerButton {
+    width: 500px;
+    height: 45px;
+    background: #00B0B9;
+    border-radius: 6px;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    color: white;
+    border: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .loginInput {
+        width: 80%;
+        height: 40px;
+    }
+    .passwordInput {
+        width: 80%;
+        height: 40px;
+    }
+    .registerButton {
+        width: 80%;
+        height: 40px;
+    }
+}
+
+.inputIcon {
+    cursor: pointer;
+    position: relative;
+    left: 25px;
+    width: 15px;
+    height: 15px;
+}

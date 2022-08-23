@@ -1,0 +1,33 @@
+<nav class="navbar navbar-dark navbar-expand-sm" style="background-color: #382E59;">
+    <div class="navbar-brand ms-md-5 ms-2"><a routerLink="/"><img src="assets\images\alemmedicusLogo.png" alt="Logo" style="height: 60px;"></a></div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-md-8">
+            <li class="nav-item ps-sm-5 ps-3">
+                <a href="#" class="nav-link">О нас</a>
+            </li>
+            <li class="nav-item px-3">
+                <a href="#" class="nav-link">Курсы</a>
+            </li>
+            <li class="nav-item px-3">
+                <a href="#" class="nav-link">MedTalks</a>
+            </li>
+            <li class="nav-item px-3">
+                <a href="#" class="nav-link">Спонсор</a>
+            </li>
+            <li class="nav-item px-3">
+                <a href="#" class="nav-link">Новости</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto me-lg-5">
+            <li class="nav-item ps-sm-5 pe-5 ps-3">
+                <a href="#" class="nav-link">Личный кабинет</a>
+            </li>
+            <li class="nav-item pe-5 ps-3">
+                <a routerLink="/submit-application" class="nav-link" [ngClass]="{'submitApplicationButton': currentRoute === '/submit-application' }">Оставить заявку</a>
+            </li>
+        </ul>
+    </div>
+</nav>

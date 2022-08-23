@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "alemmedicus-70612"
+  },
+  "targets": {
+    "alemmedicus-70612": {
+      "hosting": {
+        "alem-medicus": [
+          "alemmedicus-70612"
+        ]
+      }
+    }
+  }
+}

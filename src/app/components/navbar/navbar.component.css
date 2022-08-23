@@ -1,0 +1,28 @@
+.navbar a {
+    color: #FFFFFF;
+    cursor: pointer;
+    letter-spacing: -0.02em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.submitApplicationButton {
+    text-decoration: none;
+    background: #00B0B9;
+    border-radius: 30px;
+    padding: 13px 24px;
+    display: flex;
+} 
+
+/* .navbar::before {
+    content: "";
+    position: absolute;
+    
+    background-color: transparent;
+    bottom: -50px;
+    height: 50px;
+    width: 40px;
+    border-top-left-radius: 25px;
+
+    box-shadow: 0 -25px 0 0 #382E59; 
+} */
+

@@ -1,0 +1,22 @@
+<div class="container pt-5" style="height: 100vh;">
+    <lib-toastify-toast-container></lib-toastify-toast-container>
+    <div class="text-center"><a routerLink="/"><img src="assets\images\alemmedicusLogo2.png" alt="Logo" style="height: 80px;"></a></div>
+    <div class="registerContainer">
+        <div class="text-center">
+            <p class="inputLabel">Имя пользователя</p>
+            <img src="assets\images\login.png" alt="Login Icon" class="inputIcon">
+            <input type="text" name="login" id="login" class="loginInput" placeholder="Введите логин" [(ngModel)]="email">
+        </div>
+        <div class="text-center mt-3">
+            <p class="inputLabel">Пароль</p>
+            <img src="assets\images\password.png" alt="Password Icon" class="inputIcon">
+            <input type="password" name="password" id="password" class="passwordInput" placeholder="Введите ваш пароль" [(ngModel)]="password">
+        </div>
+        <div class="text-center mt-3">
+            <button class="registerButton" (click)="login()">Вход в аккаунт</button>
+        </div>
+        <div class="text-center mt-3">
+            <a routerLink="/register">Don't have an Account?</a>
+        </div>
+    </div>
+</div>

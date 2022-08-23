@@ -1,0 +1,40 @@
+<form>
+    <div class="formInputContainer">
+        <div>
+            <p class="inputLabel">ФИО</p>
+            <input type="text" name="surnameName" id="surnameName" class="inputBox" placeholder="ФИО">
+        </div>
+        <div>
+            <p class="inputLabel">ИИН</p>
+            <input type="text" name="iin" id="iin" class="inputBox" placeholder="ИИН">
+        </div>
+    </div>
+    <br>
+    <div class="formInputContainer">
+        <div>
+            <p class="inputLabel">Университет</p>
+            <input type="text" name="university" id="university" class="inputBox" placeholder="Университет">
+        </div>
+        <div>
+            <p class="inputLabel">Жынысы</p>
+            <input type="text" name="gender" id="gender" class="inputBox" placeholder="Жынысы">
+        </div>
+    </div>
+    <br>
+    <div class="formInputContainer" style="display: inline; left: 30px;">
+        <div>
+            <p class="inputLabel" style="font-size: 10px; margin-bottom: 0;">Label Text</p>
+            <input type="date" placeholder="{{date}}" class="dateInput" style="height: 40px;">
+        </div>
+    </div>
+    <br>
+    <div class="formInputContainer" style="display: inline; left: 30px;">
+        <div>
+            <p class="inputLabel" style="font-size: 10px; margin-bottom: 0;">Phone No.</p>
+            <select class="countryCode"> 
+                <option [value]="c.code" *ngFor="let c of countries">{{c.code}}</option>
+            </select>
+            <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" class="phoneNumber"/>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,22 @@
+.adminNavbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80px;
+    background-color: #FBFBFD;
+}
+
+.adminNavbarIcons {
+    margin-top: 170px;
+}
+
+.adminNavbarIcon {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+.adminNavbarIcon:hover {
+    top: -5px;
+}

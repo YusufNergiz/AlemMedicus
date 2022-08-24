@@ -1,14 +1,20 @@
-<div style="padding-top: 50px;"> 
-    <div class="formContainer">
-        <div class="formChanger">
-            <div class="formChangerButtonStudent" [ngStyle]="{'border-bottom': studentFormToggled ? '5px solid #00B0B9' : 'none'}" (click)="studentFormToggle()">
-                <h3 class="formChangerButtonStudentTitle" [ngStyle]="{'color': studentFormToggled ? '#00B0B9' : '#C1C1C1'}">Студент</h3>
-            </div>
-            <div class="formChangerButtonDoctor" [ngStyle]="{'border-bottom': doctorFormToggled ? '5px solid #00B0B9' : 'none'}" (click)="doctorFormToggle()">
-                <h3 class="formChangerButtonDoctorTitle" [ngStyle]="{'color': doctorFormToggled ? '#00B0B9' : '#C1C1C1'}">Доктор</h3>
+<app-navbar></app-navbar>
+<lib-toastify-toast-container></lib-toastify-toast-container>
+<section>
+    <div class="content">
+        <div style="padding-top: 50px;"> 
+            <div class="formContainer">
+                <div class="formChanger">
+                    <div class="formChangerButtonStudent" [ngStyle]="{'border-bottom': studentFormToggled ? '5px solid #00B0B9' : 'none'}" (click)="studentFormToggle()">
+                        <h3 class="formChangerButtonStudentTitle" [ngStyle]="{'color': studentFormToggled ? '#00B0B9' : '#C1C1C1'}">Студент</h3>
+                    </div>
+                    <div class="formChangerButtonDoctor" [ngStyle]="{'border-bottom': doctorFormToggled ? '5px solid #00B0B9' : 'none'}" (click)="doctorFormToggle()">
+                        <h3 class="formChangerButtonDoctorTitle" [ngStyle]="{'color': doctorFormToggled ? '#00B0B9' : '#C1C1C1'}">Доктор</h3>
+                    </div>
+                </div>
+                <app-student-form *ngIf="studentFormToggled"></app-student-form>
+                <app-doctor-form *ngIf="doctorFormToggled"></app-doctor-form>
             </div>
         </div>
-        <app-student-form *ngIf="studentFormToggled"></app-student-form>
-        <app-doctor-form *ngIf="doctorFormToggled"></app-doctor-form>
     </div>
-</div>
+</section>

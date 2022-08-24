@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterComponent } from './register.component';
+import { CarouselPauseComponent } from './carousel-pause.component';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+describe('CarouselPauseComponent', () => {
+  let component: CarouselPauseComponent;
+  let fixture: ComponentFixture<CarouselPauseComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [ CarouselPauseComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(CarouselPauseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

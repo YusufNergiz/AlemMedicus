@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from 'angular-toastify';
-import { NewsService } from 'src/app/services/news.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,9 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private newsService: NewsService, private toast: ToastService) { }
+  showPassword: boolean = false;
+
+  constructor(private userService : UserService, private toast: ToastService) { }
 
   ngOnInit(): void {
   }
@@ -28,10 +30,14 @@ export class LoginComponent implements OnInit {
       return
     }
 
-    this.newsService.login(this.email, this.password)
+    this.userService.login(this.email, this.password)
 
     this.email = ''
     this.password = ''
+  }
+
+  showPasswordToggle() {
+    this.showPassword = !this.showPassword
   }
 
 }

@@ -12,6 +12,15 @@
     --secondary: #90A3BF;
 } */
 
+section {
+    background: #382E59;
+}
+
+.content {
+    border-radius: 60px 60px 0 0;
+    background: linear-gradient(to right, #E2E1FF, #90A3BF);;
+}
+
 
 .parent {
     position: relative;

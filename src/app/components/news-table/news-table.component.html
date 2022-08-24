@@ -1,0 +1,16 @@
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="row" style="width: 50px;">№</th>
+        <th scope="col">Заголовок</th>
+        <th scope="col" colspan="2">Дата добавления</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let index of news | async; let i = index">
+      <tr style="cursor: pointer;">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{index.title}}</td>
+        <td>{{index.date.toDate() | date:'dd/MM/yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>

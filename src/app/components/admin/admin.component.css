@@ -1,0 +1,65 @@
+.createNewsButton {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    width: 170px;
+    height: 32px;
+    background: #00B0B9;
+    border-radius: 6px;
+    font-family: 'Cera Pro' sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    border: none;
+    text-align: center;
+    justify-content: center;
+}
+
+.createNewsButton:hover {
+    top: -5px;
+}
+
+.adminHeader {
+    font-family: 'Cera Pro' sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1A3154;
+}
+
+.link {
+    font-family: 'Cera Pro' sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #2D3540;
+}
+
+.activeLink {
+    border: 1px solid #00B0B9;
+}
+
+.searchInput {
+    width: 392PX;
+    height: 40px;
+    background: #FBFBFD;
+    border: 1px solid #B6C2E2;
+    border-radius: 8px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    text-indent: 10px;
+}
+
+.inputIcon {
+    cursor: pointer;
+    position: relative;
+    right: 25px;
+}

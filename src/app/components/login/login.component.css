@@ -97,3 +97,9 @@
     width: 15px;
     height: 15px;
 }
+
+.showPasswordIcon {
+    cursor: pointer;
+    position: relative;
+    right: 25px;
+}

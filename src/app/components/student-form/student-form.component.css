@@ -1,4 +1,10 @@
 
+@media only screen and (max-width: 600px) {
+    .hidden {
+        display: none !important;
+    }
+}
+
 .formInputContainer {
     position: relative;
     top: 50px;
@@ -6,18 +12,47 @@
     justify-content: space-around;
 }
 
+@media only screen and (max-width: 600px) {
+    .formInputContainer {
+        display: block;
+        text-align: center;
+    }
+    .formInputContainer * {
+        padding-top: 10px;
+    }
+}
+
+.formProgressImageContainer {
+    position: relative;
+    top: 25px;
+    left: 30%;
+    display: flex;
+    text-align: center;
+    width: 260px;
+}
+
+@media only screen and (max-width: 600px) {
+    .formProgressImageContainer {
+        left: 15%;
+    }
+}
+
+.progressBar {
+    margin: auto;
+}
+
 .inputLabel {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #000000;
-    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #303030;
+    margin-bottom: -1px;
 }
 
 .inputBox {
-    width: 284px;
+    width: 300px;
     height: 52px;
     left: 36px;
     top: 129px;
@@ -66,4 +101,29 @@
     flex: none;
     order: 1;
     flex-grow: 1;
+}
+
+nz-select {
+    width: 300px;
+    height: 52px;
+    border-radius: 10px;
+    padding-top: 10px;    
+}
+
+nz-upload {
+    width: 300px;
+    height: 52px;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.uploadFileText {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 10px;
+    align-items: center;
+    color: #00B0B9;
 }

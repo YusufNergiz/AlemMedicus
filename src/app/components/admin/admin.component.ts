@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +11,7 @@ export class AdminComponent implements OnInit {
   archiveLinkToggled: boolean = false;
   activeLinkToggled: boolean = true;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,10 @@ export class AdminComponent implements OnInit {
   toggleActiveLink() {
     this.activeLinkToggled = true
     this.archiveLinkToggled = false
+  }
+  
+  createNewsPage() {
+    this.router.navigateByUrl('/create-news')
   }
 
 }

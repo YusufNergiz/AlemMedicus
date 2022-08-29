@@ -13,6 +13,10 @@
     display: flex;
 } 
 
+.navbar .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #21E1E1;
+}
+
 /* .navbar::before {
     content: "";
     position: absolute;

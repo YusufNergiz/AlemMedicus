@@ -7,19 +7,20 @@
         <h1 class="pageHeader text-center text-lg-start mb-4">Новости</h1>
         <div class="row">
           <div class="col-md-9 col-sm-8 col-xs-12 parent">
-            <div>
-              <!-- <img src="assets\images\pexels-pixabay-356040.png" alt="White shirt Man" class="img-fluid">
-              <p class="newsImageType">CONFERENCE</p>
-              <p class="newsImageTitle">Прошла встреча медиков в Астане</p>
-              <button class="newsImageButton">Читать подробнее</button> -->
               <app-carousel-pause></app-carousel-pause>
-            </div>
           </div>
           <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="newsContainer">
-              <app-news-item imagePath="assets\images\pexels-jonathan-meyer-668298.png" newsTitle="News Title Lorem Ipsum Dolor Sit Amet" uploadTime="1 Hour"></app-news-item>
-              <app-news-item imagePath="assets\images\pexels-anna-shvets-3844581.png" newsTitle="News Title number 2 Lorem Ipsum Dolor Sit Amet" uploadTime="30 Minutes"></app-news-item>
+              <div class="newsContainer">
+                <div class="news-item1" *ngFor="let item of archive | slice:0 : 2"> 
+                  <div (click)="navigateToNews(item.newsId)">
+                    <img src={{item.imageUrl}} alt="News Image" class="img-fluid news-item-image">
+                    <h5 class="news-item-title">{{item.title}}</h5>
+                    <p class="news-item-time">{{item.date?.toDate() | date:'dd/MM/yyyy'}}</p>
+                  </div>
+              </div>
+              <br>
             </div>
+            <img src="assets\images\arrow-down.png" alt="Arrow Down" class="arrowDownButton" (click)="navigateToArchive()">
           </div>
         </div>
         <div class="row mt-3">

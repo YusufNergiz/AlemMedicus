@@ -47,6 +47,13 @@
     height: 100vh;
     margin: 0 auto;
     border-radius: 25px;
+    border: 2px solid black;
+}
+
+@media only screen and (max-width: 600px) {
+    .formContainer {
+        width: 90%;
+    }
 }
 
 .formChanger {

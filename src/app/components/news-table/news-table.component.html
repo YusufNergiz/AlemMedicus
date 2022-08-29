@@ -7,10 +7,11 @@
       </tr>
     </thead>
     <tbody *ngFor="let index of news | async; let i = index">
-      <tr style="cursor: pointer;">
+      <tr style="cursor: pointer;" (click)="navigateToUpdateNews(index.newsId)">
         <th scope="row">{{i + 1}}</th>
         <td>{{index.title}}</td>
-        <td>{{index.date.toDate() | date:'dd/MM/yyyy'}}</td>
+        <td>{{index.date?.toDate() | date:'dd/MM/yyyy'}}</td>
+        <img src="assets\images\Edit.png" alt="Edit Icon">
       </tr>
     </tbody>
   </table>

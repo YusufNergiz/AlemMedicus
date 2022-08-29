@@ -1,12 +1,13 @@
 <app-admin-navbar></app-admin-navbar>
+<lib-toastify-toast-container></lib-toastify-toast-container>
 <div class="container mt-5">
     <div>
         <div class="row">
             <h3 class="col-md-1 col-6 adminHeader">Новости</h3>
-            <button class="col-md-2 col-6 ms-4 createNewsButton">Создать новость</button>
+            <button class="col-md-2 col-6 ms-4 createNewsButton" (click)="createNewsPage()">Создать новость</button>
         </div>
         <div class="row mt-3">
-            <div routerLink="/news-table" class="col-md-1 col-6"  style="cursor: pointer;" [ngStyle]="{'border-bottom' : activeLinkToggled ? '2px solid #00B0B9' : 'none'}" (click)="toggleActiveLink()">
+            <div class="col-md-1 col-6"  style="cursor: pointer;" [ngStyle]="{'border-bottom' : activeLinkToggled ? '2px solid #00B0B9' : 'none'}" (click)="toggleActiveLink()">
                 <h5 class="link" [ngStyle]="{'color' : activeLinkToggled ? '#00B0B9' : '#2D3540'}">Активные</h5>
             </div>
             <div class="col-md-1 col-6" style="cursor: pointer;" [ngStyle]="{'border-bottom' : archiveLinkToggled ? '2px solid #00B0B9' : 'none'}" (click)="toggleArchiveLink()">
@@ -19,6 +20,7 @@
         </div>
         <div class="mt-5">
             <app-news-table *ngIf="activeLinkToggled"></app-news-table>
+            <app-archive-table *ngIf="archiveLinkToggled"></app-archive-table>
         </div>
     </div>
 </div>

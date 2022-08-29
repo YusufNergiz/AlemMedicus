@@ -1,0 +1,53 @@
+<app-admin-navbar></app-admin-navbar>
+<lib-toastify-toast-container></lib-toastify-toast-container>
+<div class="container mt-5" *ngIf="!loading">
+    <div>
+        <div class="row">
+            <img src="assets\images\goBackIcon.png" alt="Go Back Icon" class="col-md-1 col-6 goBackButton" (click)="goBack()"> 
+            <h3 class="col-md-2 col-6 ms-1 createNewsHeader">Создать новость</h3>
+        </div>
+    </div>
+    <div class="mt-5 ms-3 addNewsContainer">
+        <h4 class="ms-4 pt-5 addNewsContainerHeader">Данные</h4>
+        <img src="assets\images\Divider.png" alt="Divider" class="ms-3">
+        <div class="row">
+            <div class="col-3 ms-4 mt-3 uploadImageTab" style="position: relative;">
+                <img src="assets\images\Frame corner right-top.png" alt="Right Top" class="rightTopFrame">
+                <img src="assets\images\Frame corner left-top.png" alt="Left Top" class="leftTopFrame">
+                <img src="assets\images\Frame corner right-bottom.png" alt="Right Bottom" class="rightBottomFrame">
+                <img src="assets\images\Frame corner left-bottom.png" alt="Left Bottom" class="leftBottomFrame">
+                <label for="imageUpload">
+                    <div class="imageUploadTabContainer">
+                        <img [src]="!replaceImage ? defaultImage : url" alt="Image Upload Tab" class="img-fluid imageUploadTab">
+                    </div>
+                    <img src="assets\images\uploadImageButton.png" alt="Upload Image Button" class="uploadImageButton">
+                </label>
+                <input type="file" (change)="selectFile($event); chooseFile($event)" id="imageUpload" style="display: none;">
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="inputLabel">Заголовок</p>
+                        <input type="text" placeholder="Введите название" class="newsTitleInput" value="{{news.title}}" [(ngModel)]="newsTitle">
+                    </div>
+                    <div class="col-12 mt-3">
+                        <p class="inputLabel">Описание поста</p>
+                        <textarea type="text" placeholder="Напишите описание..." class="newsContentInput" [(ngModel)]="newsContent">{{news.content}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 ms-4 mt-5">
+                <p class="imageFormatText mx-auto">Допустимые форматы 
+                    загрузки изображения:
+                    jpg, png, svg.</p>
+            </div>
+        </div>
+        <div class="createNewsButtonsContainer">
+            <button class="updateButton me-3" (click)="updateNewsButton()">Опубликовать новость</button>
+            <button class="cancelButton me-3" (click)="cancelNewsUpdate()">Отменить</button>
+            <button class="sendToArchiveButton me-3" (click)="sendNewsToArchive()">Отправить в архив</button>
+            <button class="deleteNewsButton" (click)="deleteNews()">Удалить новость</button>
+        </div>
+    </div>
+</div>
+<app-loading *ngIf="loading"></app-loading>

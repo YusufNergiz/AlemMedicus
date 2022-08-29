@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,11 +12,15 @@ export class NewsTableComponent implements OnInit {
 
   news: Observable<any>
 
-  constructor(private fbs: AngularFirestore) { 
+  constructor(private fbs: AngularFirestore, private router: Router) { 
     this.news = fbs.collection('news').valueChanges()
   }
 
   ngOnInit(): void {
+  }
+
+  navigateToUpdateNews(newsId: string) {
+    this.router.navigate([`/update-news/${newsId}`])
   }
 
 }

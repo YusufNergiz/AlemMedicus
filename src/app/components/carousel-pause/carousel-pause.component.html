@@ -1,11 +1,12 @@
-<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-    <ng-template ngbSlide *ngFor="let image of images">
-      <div class="picsum-img-wrapper">
-        <img [src]="image" alt="Random slide">
-      </div>
-      <div class="carousel-caption">
-        <h3>No mouse navigation</h3>
-        <p>This carousel hides navigation arrows and indicators.</p>
-      </div>
+<ngb-carousel *ngIf="news" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let index of news | async">
+        <div class="picsum-img-wrapper carouselImageContainer" style="border-radius: 25px;">
+            <img [src]="index.imageUrls" alt="Random slide" class="img-fluid carouselImage" style="border-radius: 25px;">
+        </div>
+        <div class="carousel-caption">
+            <p class="newsImageType">CONFERENCE</p>
+            <p class="newsImageTitle">{{index.title}}</p>
+            <button class="newsImageButton" (click)="navigateToNews(index.newsId)">Читать подробнее</button>
+        </div>
     </ng-template>
-  </ngb-carousel>
+</ngb-carousel>

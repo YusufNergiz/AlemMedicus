@@ -11,13 +11,16 @@ import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbCarousel, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap'; 
-
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { NewsItemComponent } from './components/news-item/news-item.component';
 import { HomeComponent } from './components/home/home.component';
 import { SubmitApplicationComponent } from './components/submit-application/submit-application.component';
 import { StudentFormComponent } from './components/student-form/student-form.component';
@@ -30,6 +33,22 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { NewsTableComponent } from './components/news-table/news-table.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselPauseComponent } from './components/carousel-pause/carousel-pause.component';
+import { CreateNewsComponent } from './components/create-news/create-news.component';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { UpdateNewsComponent } from './components/update-news/update-news.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { NewsComponent } from './components/news/news.component';
+import { ArchiveTableComponent } from './components/archive-table/archive-table.component';
+import { UpdateArchiveComponent } from './components/update-archive/update-archive.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { AllNewsComponent } from './components/all-news/all-news.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+registerLocaleData(en);
 
 
 const appRoutes: Routes = [
@@ -62,6 +81,33 @@ const appRoutes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'create-news',
+    component: CreateNewsComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'update-news/:newsId',
+    component: UpdateNewsComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'update-archive/:newsId',
+    component: UpdateArchiveComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'news/:newsId',
+    component: NewsComponent
+  },
+  {
+    path: 'archive/:newsId',
+    component: ArchiveComponent
+  },
+  {
+    path: 'all-news',
+    component: AllNewsComponent
   }
 ]
 
@@ -69,7 +115,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    NewsItemComponent,
     HomeComponent,
     SubmitApplicationComponent,
     StudentFormComponent,
@@ -79,12 +124,22 @@ const appRoutes: Routes = [
     AdminComponent,
     AdminNavbarComponent,
     NewsTableComponent,
-    CarouselPauseComponent
+    CarouselPauseComponent,
+    CreateNewsComponent,
+    UpdateNewsComponent,
+    LoadingComponent,
+    LoadingComponent,
+    NewsComponent,
+    ArchiveTableComponent,
+    UpdateArchiveComponent,
+    ArchiveComponent,
+    AllNewsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     BrowserModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     AngularFireAuthModule,
@@ -97,8 +152,13 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     NgbCarouselModule,
-  ],
-  providers: [ToastService],
+    BrowserAnimationsModule,
+    NzInputModule,
+    NzFormModule,
+    NzSelectModule,
+    NzUploadModule 
+ ],
+  providers: [ToastService, { provide: NZ_I18N, useValue: en_US }, {provide: NzMessageService}],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

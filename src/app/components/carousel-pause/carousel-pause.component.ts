@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { NgbCarousel, NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -9,37 +12,23 @@ import { NgbCarousel, NgbCarouselConfig, NgbSlideEvent, NgbSlideEventSource } fr
 })
 export class CarouselPauseComponent implements OnInit {
 
+  news: Observable<any>
+
   showNavigationArrows = false;
   showNavigationIndicators = false;
-  images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  newsImages = []
 
-  // @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
-
-  constructor(config: NgbCarouselConfig) {
+  constructor(config: NgbCarouselConfig, private fbs: AngularFirestore, private router: Router) {
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
+    this.news = fbs.collection('news').valueChanges()
    }
 
   ngOnInit(): void {
   }
 
-  // togglePaused() {
-  //   if (this.paused) {
-  //     this.carousel.cycle();
-  //   } else {
-  //     this.carousel.pause();
-  //   }
-  //   this.paused = !this.paused;
-  // }
-
-  // onSlide(slideEvent: NgbSlideEvent) {
-  //   if (this.unpauseOnArrow && slideEvent.paused &&
-  //     (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
-  //     this.togglePaused();
-  //   }
-  //   if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
-  //     this.togglePaused();
-  //   }
-  // }
+  navigateToNews(newsId: string) {
+    this.router.navigate([`/news/${newsId}`])
+  }
 
 }

@@ -85,3 +85,320 @@
   from {opacity: .4}
   to {opacity: 1}
 }
+
+.arrowDownButton {
+  position: relative;
+  bottom: 35px;
+  left: 160px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .arrowDownButton {
+    bottom: 50px;
+    left: 180px;
+  }
+}
+
+.newsContainer {
+  display: inline-block;
+  background-color: white;
+  border-radius: 25px;
+  height: 480px;
+  width: 322px;
+}
+
+@media only screen and (max-width: 600px) {
+  .newsContainer {
+      margin-top: 10px;
+      display: inline-block;
+      justify-content: space-between;
+      height: 450px;
+      width: 370px;
+      margin-left: 10px;
+  }
+  .newsContainer {
+      padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .secondArchiveImage {
+    margin-top: 50px;
+  }
+}
+
+.secondaryNews {
+  background-color: white;
+  border-radius: 25px;
+  margin-left: 50px;
+  height: 625px;
+  width: 318px;
+}
+
+.contactContainer {
+  display: flex;
+  height: 250px;
+  margin-left: 50px;
+  width: 88vw;
+  justify-content: space-evenly;
+}
+
+@media (min-width:1600px) {
+  .contactContainer {
+      justify-content: center;
+  }
+  .contacts {
+      margin-right: 20px;
+  }
+  .socialMedia {
+      margin-right: 20px;
+  }
+  .pageHeader {
+      margin-left: 16vw;
+  }
+
+}
+
+
+.contacts {
+  top: 0;
+  position: relative;
+  left: 0;
+  width: 430px;
+  height: 170px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 170%);
+  filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.1));
+  border-radius: 30px;
+  position: relative;
+  transition: top ease 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+  .contacts {
+      width: 100%;
+      height: 120px;
+  }
+}
+
+.contacts:hover {
+  top: -10px;
+}
+
+.contactTitle {
+  position: absolute;
+  width: 275px;
+  height: 39px;
+  left: 30px;
+  top: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #303030;
+}
+
+.contactNumber {
+  position: absolute;
+  width: 217px;
+  height: 30px;
+  left: 30px;
+  top: 60px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #303030;
+}
+
+.contactEmail {
+  position: absolute;
+  width: 217px;
+  height: 30px;
+  left: 30px;
+  top: 90px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #303030;
+}
+
+.socialMedia {
+  margin-left: 25px;
+  width: 430px;
+  height: 170px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 170%);
+  filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.1));
+  border-radius: 30px;
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+  .socialMedia {
+      margin-top: 10px;
+      margin-left: 0;
+      width: 100%;
+      height: 120px;
+  }
+  .socialIcon {
+      height: 65px;
+  }
+  .contactTitle {
+      top: 5px;
+  }
+}
+
+.socialMedia:hover {
+  top: -10px;
+}
+
+.socialIcons {
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 600px) {
+  .socialIcons {
+      top: 40px;
+      left: 20px;
+  }
+}
+
+.donate {
+  position: relative;
+  margin-left: 100px;
+  width: 320px;
+  height: 170px;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 160%);
+  filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.1));
+  border-radius: 30px;
+  position: relative;
+  top: 0;
+  right: 0;
+  transition: top ease 0.5s;
+}
+
+@media only screen and (max-width: 600px) {
+  .donate {
+      margin-top: 10px;
+      margin-left: 0;
+      width: 100%;
+      height: 120px;
+  }
+}
+
+.donate:hover {
+  top: -10px;
+}
+
+.donateButton {
+  background: #00B0B9;
+  border: 1px solid #00B0B9;
+  border-radius: 30px;
+  padding: 13px 24px;
+  gap: 10px;
+  color: white;
+  position: absolute;
+  width: 191px;
+  height: 59px;
+  left: 50px;
+  top: 80px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .donateButton {
+      top: 45px;
+      left: 20px;
+  }
+}
+
+.news-item1 {
+  padding-top: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+  height: 200px;
+}
+
+.news-item-image {
+  width: 260px;
+  height: 165px;
+  border-radius: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .news-item1 {
+      margin-right: 10px;
+      height: 100px;
+      margin-bottom: 70px;
+      padding-bottom: 50px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .news-item-image {
+      margin-top: 10px;
+      padding-top: 20px;
+      margin-left: 10px;
+      width: 350px;
+      height: 150px;
+  }
+}
+
+.news-item-title {
+  margin-left: 15px;
+  text-align: left;
+  font-family: 'Montserrat';
+  font-style: normal;
+  color: #303030;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  top: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  direction: ltr;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  .news-item-title {
+      font-size: 12px;
+      line-height: 16px;
+      margin-left: 5px;
+  }
+}
+
+.news-item-time {
+  text-align: left;
+  color: #949494;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 10px;
+  margin-left: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .news-item-time {
+      margin-left: 5px;
+  }
+}

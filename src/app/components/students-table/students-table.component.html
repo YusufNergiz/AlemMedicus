@@ -1,0 +1,20 @@
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Отчество</th>
+        <th>Пол</th>
+        <th>ИИН</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let student of students | async; let i = index">
+      <tr style="cursor: pointer;">
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td>{{student.fatherName}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.iin}}</td>
+      </tr>
+    </tbody>
+  </table>

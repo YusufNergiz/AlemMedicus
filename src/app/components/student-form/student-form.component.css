@@ -250,9 +250,41 @@ nz-upload {
     cursor: pointer;
 }
 
+.goBackToHomeButton {
+    position: relative;
+    width: 198px;
+    height: 50px;
+    top: 25px;
+    left: 35px;
+    background: #00B0B9;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
     .submitStudentFormButton {
         left: 90px;
         top: 10px;
+    }
+}
+
+.doneContainer {
+    margin-top: 100px;
+    margin-left: 220px;
+}
+
+@media only screen and (max-width: 600px) {
+    .doneContainer {
+        margin-top: 150px;
+        margin-left: 50px;
     }
 }

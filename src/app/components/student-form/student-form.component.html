@@ -66,7 +66,7 @@
                 <input type="string" class="inputBox" name="phoneNumber" id="phoneNumber" placeholder="+7 777 77 77" formControlName="phoneNumber">
             </div>
         </div>
-        <button class="continueButton" (click)="enableStudentFormPage2();">Әрі қарай</button>
+        <button class="continueButton" (click)="enableStudentFormPage2()">Әрі қарай</button>
     </div>
     <!-- Student Form Page 1 End  -->
 
@@ -228,4 +228,20 @@
         </div>
     </div>
     <!-- Student Form Page 3 End -->
+
+    <!-- Student Form Page 4 Begin -->
+    <div *ngIf="fourthPageEnabled">
+        <div class="doneContainer">
+            <div>
+                <img src="assets\images\studetnFormPageFinalPage.png" alt="Done Image">
+            </div>
+            <div>
+                <img src="assets\images\studentFormFinalPageDoneText.png" alt="Done Text">
+            </div>
+            <div>
+                <button class="goBackToHomeButton" (click)="navigateToMainPage()">Басты бетке</button>
+            </div>
+        </div>
+    </div>
+    <!-- Student Form Page 4 End -->
 </form>

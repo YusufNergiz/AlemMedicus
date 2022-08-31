@@ -51,6 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { StudentsTableComponent } from './components/students-table/students-table.component';
 
 registerLocaleData(en);
 
@@ -143,6 +144,8 @@ const icons: IconDefinition[] = [
     ArchiveComponent,
     AllNewsComponent,
     ImageUploadComponent,
+    StudentsTableComponent,
+    StudentsTableComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

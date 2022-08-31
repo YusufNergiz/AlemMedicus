@@ -11,6 +11,9 @@ export class AdminComponent implements OnInit {
   archiveLinkToggled: boolean = false;
   activeLinkToggled: boolean = true;
 
+  studentsDataPageEnabled: boolean = false
+  newsDataPageEnabled: boolean = true
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -28,6 +31,16 @@ export class AdminComponent implements OnInit {
   
   createNewsPage() {
     this.router.navigateByUrl('/create-news')
+  }
+  
+  newDataPageToggle() {
+    this.newsDataPageEnabled = true
+    this.studentsDataPageEnabled = false
+  }
+
+  studentsDataPageToggle() {
+    this.studentsDataPageEnabled = true
+    this.newsDataPageEnabled = false
   }
 
 }

@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { uuidv4 } from '@firebase/util';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -68,13 +69,14 @@ export class StudentFormComponent implements OnInit {
   firstPageEnabled: boolean = true;
   secondPageEnabled: boolean = false;
   thirdPageEnabled: boolean = false;
+  fourthPageEnabled: boolean = false;
   //
 
   ////////////////////
   allImageUrls: any[] = []
   ///////////////////
 
-  constructor(private msg: NzMessageService, private toast: ToastService, private afs: AngularFirestore) { }
+  constructor(private msg: NzMessageService, private toast: ToastService, private afs: AngularFirestore, private router: Router) { }
 
   @Output() studentFormFirstPageData: EventEmitter<object> = new EventEmitter()
 
@@ -97,10 +99,21 @@ export class StudentFormComponent implements OnInit {
     this.secondPageEnabled = false
     this.thirdPageEnabled = true
   }
+
+  enableStudentFormPage4() {
+    this.firstPageEnabled = false
+    this.secondPageEnabled = false
+    this.thirdPageEnabled = false
+    this.fourthPageEnabled = true
+  }
   //
 
   get f(){
     return this.studentForm.controls;
+  }
+
+  navigateToMainPage() {
+    this.router.navigate(['/'])
   }
 
   // Gets the inputted file
@@ -162,9 +175,9 @@ export class StudentFormComponent implements OnInit {
       this.essayImageName = file.name
     }
   }
-
+  //
   
-
+  /// These Functions assign the values of the select fields to studentForm FormGroup
   chooseGender(event: any) {
     this.studentForm.patchValue({
       gender: event.target.value
@@ -188,72 +201,71 @@ export class StudentFormComponent implements OnInit {
       course: event.target.value
     })
   }
+  //////
 
   // Function To Upload files to Firebase Storage and get the DownloadUrl
-  async fileUploadToFirestore(file: any) {
-    const storage = getStorage();
-    
-    const storageRef = ref(storage, 'studentData/' + file.name + this.studentForm.get('firstName')?.value);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    
-    uploadTask.on('state_changed',
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused');
-            break;
-          case 'running':
-            console.log('Upload is running');
-            break;
+  ////////////////////////////////
+  async uplaodImage(file: any) {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage()
+
+      const storageRef = ref(storage, 'studentData/' + file.name + this.studentForm.get('firstName')?.value)
+
+      const uploadTask = uploadBytesResumable(storageRef, file  )
+
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        }, 
+        (error) => {
+          reject(error)
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case 'storage/unauthorized':
+              this.toast.error("User doesn't have permission to access the object")
+              break;
+            case 'storage/canceled':
+              this.toast.error("User canceled the upload")
+              break;
+
+            // ...
+
+            case 'storage/unknown':
+              this.toast.error("Unknown error occurred, inspect error.serverResponse")
+              break;
+          }
+        }, 
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL)
+          });
         }
-      }, 
-      (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case 'storage/unauthorized':
-            this.toast.error("User doesn't have permission to access the object")
-            break;
-          case 'storage/canceled':
-            this.toast.error("User canceled the upload")
-            break;
-    
-          // ...
-    
-          case 'storage/unknown':
-            this.toast.error("Unknown error occurred, inspect error.serverResponse")
-            break;
-        }
-      }, 
-      () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          this.allImageUrls.push(downloadURL)
-        });
-      }
-    );
+      );
+    })
   }
-  //
+  ////////////////////////////////
 
   sendStudentDataToFirestore(id: any, studentData: any) {
-    return this.afs.collection('students').doc(id).set(studentData)
+    this.afs.collection('students').doc(id).set(studentData)
+    this.enableStudentFormPage4()
   }
 
   // Student Form Submittion
   async onStudentFormSubmit() {
-    this.fileUploadToFirestore(this.studentForm.get('idImageSource')?.value)
-    console.log(this.allImageUrls)
-    this.fileUploadToFirestore(this.studentForm.get('transcriptImageSource')?.value)
-    console.log(this.allImageUrls)
-    this.fileUploadToFirestore(this.studentForm.get('achievementsImageSource')?.value)
-    console.log(this.allImageUrls)
-    this.fileUploadToFirestore(this.studentForm.get('englishCertificateImageSource')?.value)
-    console.log(this.allImageUrls)
-    this.fileUploadToFirestore(this.studentForm.get('socialStatusImageSource')?.value)
-    console.log(this.allImageUrls)
-    this.fileUploadToFirestore(this.studentForm.get('essayImageSource')?.value)
+    const allFiles = [this.studentForm.get('idImageSource')?.value, this.studentForm.get('transcriptImageSource')?.value, this.studentForm.get('achievementsImageSource')?.value, this.studentForm.get('englishCertificateImageSource')?.value, this.studentForm.get('socialStatusImageSource')?.value, this.studentForm.get('essayImageSource')?.value,]
+    const fileUrls = await Promise.all([...allFiles].map((file) => this.uplaodImage(file)))
     const randomId = uuidv4()
 
     const studentDataClone = {
@@ -273,15 +285,13 @@ export class StudentFormComponent implements OnInit {
       school: this.studentForm.get('school')?.value,
       englishLevel: this.studentForm.get('englishLevel')?.value,
       additionalQuestion: this.studentForm.get('additionalQuestion')?.value,
-      allFiles: this.allImageUrls,
+      allFiles: fileUrls,
     }
 
     await this.sendStudentDataToFirestore(randomId, studentDataClone)
   }
   //
-                 ///////////////////// The allFiles array is empty in firebase firestore!! Fix that
   consoleLog() { 
-    console.log(this.allImageUrls) 
   }
 
 }

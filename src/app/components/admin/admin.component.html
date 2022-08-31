@@ -1,4 +1,4 @@
-<app-admin-navbar></app-admin-navbar>
+<app-admin-navbar (newsDataEnabled)="newDataPageToggle()" (studentsDataEnabled)="studentsDataPageToggle()"></app-admin-navbar>
 <lib-toastify-toast-container></lib-toastify-toast-container>
 <div class="container mt-5">
     <div>
@@ -18,9 +18,12 @@
             <input type="text" placeholder="Search" class="searchInput">
             <img src="assets\images\searchIcon.png" alt="Search Icon" class="inputIcon">
         </div>
-        <div class="mt-5">
+        <div class="mt-5" *ngIf="newsDataPageEnabled">
             <app-news-table *ngIf="activeLinkToggled"></app-news-table>
             <app-archive-table *ngIf="archiveLinkToggled"></app-archive-table>
+        </div>
+        <div class="mt-5" *ngIf="studentsDataPageEnabled">
+            <app-students-table></app-students-table>
         </div>
     </div>
 </div>

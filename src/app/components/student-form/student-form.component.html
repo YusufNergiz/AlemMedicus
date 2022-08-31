@@ -1,58 +1,231 @@
-<form nz-form>
+<form [formGroup]="studentForm" (ngSubmit)="onStudentFormSubmit()">
     <!-- Student Form Page 1 Begin -->
-    <div class="formProgressImageContainer">
-        <img src="assets\images\formPage1Active.png" alt="Form Progress" class="progressBar">
-        <img src="assets\images\formInput2Disabled.png" alt="Form Progress" class="progressBar">
-        <img src="assets\images\formInputRectangle.png" alt="Form Progess" class="progressBar">
-        <img src="assets\images\formInput2Disabled.png" alt="Form Progress" class="progressBar">
-    </div>
-
-    <div class="formInputContainer">
-        <div>
-            <p class="inputLabel">Аты <span style="color: red;">*</span></p>
-            <input type="text" name="firstName" id="firstName" class="inputBox" placeholder="Атыңызды жазыңыз" [(ngModel)]="firstName">
+    <div *ngIf="firstPageEnabled">
+        <div class="formProgressImageContainer">
+            <img src="assets\images\formPage1Active.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\formInput2Disabled.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\formInputRectangle.png" alt="Form Progess" class="progressBar">
+            <img src="assets\images\formInput2Disabled.png" alt="Form Progress" class="progressBar">
         </div>
-        <div>
-            <p class="inputLabel">Тегі <span style="color: red;">*</span></p>
-            <input type="text" name="lastName" id="lastName" class="inputBox" placeholder="Тегіңізді жазыңыз" [(ngModel)]="lastName">
-        </div>
-    </div>
-    <br class="hidden">
-    <div class="formInputContainer">
-        <div>
-            <p class="inputLabel">Әкесінің аты <span style="color: red;">*</span></p>
-            <input type="text" name="fatherName" id="fatherName" class="inputBox" placeholder="Әкеңіздің атын жазыңыз" [(ngModel)]="fatherName">
-        </div>
-        <div>
-            <p class="inputLabel">Жынысы <span style="color: red;">*</span></p>
-                <nz-select
-            [(ngModel)]="gender"
-            nzPlaceHolder="Select users"
-            nzAllowClear
-            name="gender"
-            >
-            <nz-option *ngFor="let gender of genders" [nzValue]="gender.value" [nzLabel]="gender.label"></nz-option>
-            </nz-select>
-        </div>
-    </div>
-    <br class="hidden">
-    <div class="formInputContainer">
-        <div>
-            <p class="inputLabel">ИИН <span style="color: red;">*</span></p>
-            <input type="text" name="iin" id="iin" class="inputBox" placeholder="ЖСН нөміріңізді жазыңыз" [(ngModel)]="iin">
-        </div>
-        <div>
-            <p class="inputLabel">Жеке куәлігіңіздің суреті</p>
-            <div class="inputBox">
-                <nz-upload
-            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            [nzHeaders]="{ authorization: 'authorization-text' }"
-            (nzChange)="handleChange($event)"
-            >
-            <div style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload File"><span class="uploadFileText">файлды жүктеу</span></div>
-            </nz-upload>
+    
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Аты <span style="color: red;">*</span></p>
+                <input type="text" name="firstName" id="firstName" class="inputBox" placeholder="Атыңызды жазыңыз" formControlName="firstName">
+            </div>
+            <div>
+                <p class="inputLabel">Тегі <span style="color: red;">*</span></p>
+                <input type="text" name="lastName" id="lastName" class="inputBox" required placeholder="Тегіңізді жазыңыз" formControlName="lastName">
             </div>
         </div>
+        <br class="hidden">
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Әкесінің аты <span style="color: red;">*</span></p>
+                <input type="text" name="fatherName" id="fatherName" class="inputBox" placeholder="Әкеңіздің атын жазыңыз" formControlName="fatherName">
+            </div>
+            <div>
+                <p class="inputLabel">Жынысы <span style="color: red;">*</span></p>
+                    <nz-select
+                formControlName="gender"
+                nzPlaceHolder="Жынысы"
+                nzAllowClear
+                name="gender"
+                (change)="chooseGender($event)"
+                >
+                <nz-option *ngFor="let gender of genders" [nzValue]="gender" [nzLabel]="gender"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <br class="hidden">
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">ИИН <span style="color: red;">*</span></p>
+                <input type="number" name="iin" id="iin" class="inputBox" placeholder="ЖСН нөміріңізді жазыңыз" formControlName="iin">
+            </div>
+            <div>
+                <p class="inputLabel">Жеке куәлігіңіздің суреті <span style="color: red;">*</span></p>
+                <label for="idImage">
+                    <div class="inputBox" style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload Image"><span class="uploadFileText">файлды жүктеу</span></div>
+                </label>
+                <p *ngIf="f.idImageSource" style="color: #42855B;">{{idImageName}}</p>
+                <input type="file" name="idImage" id="idImage" style="display: none;" (change)="chooseIdImageFile($event)" formControlName="idImage">
+                <div *ngIf="f.idImage.touched && f.idImage.invalid" class="alert alert-danger">
+                    <div *ngIf="f.idImage.errors?.['required']">File is required.</div>
+                </div>        
+            </div>
+        </div>
+        <br class="hidden">
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Почта <span style="color: red;">*</span></p>
+                <input type="email" class="inputBox" name="email" id="email" placeholder="Пошатаңызды жазыңыз" formControlName="email">
+            </div>
+            <div>
+                <p class="inputLabel">Телефон номер (What’s app) <span style="color: red;">*</span></p>
+                <input type="string" class="inputBox" name="phoneNumber" id="phoneNumber" placeholder="+7 777 77 77" formControlName="phoneNumber">
+            </div>
+        </div>
+        <button class="continueButton" (click)="enableStudentFormPage2();">Әрі қарай</button>
     </div>
     <!-- Student Form Page 1 End  -->
+
+    <!-- Student Form Page 2 Begin -->
+    <div *ngIf="secondPageEnabled">
+        <div class="formProgressImageContainer">
+            <img src="assets\images\Group 1.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\activeRectangle.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\studentSecondPagecurrent.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\formInputRectangle.png" alt="Form Progess" class="progressBar">
+            <img src="assets\images\formInput2Disabled.png" alt="Form Progress" class="progressBar">
+        </div>
+    
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Университет <span style="color: red;">*</span></p>
+                    <nz-select
+                formControlName="university"
+                nzPlaceHolder="Университетіңізді таңдаңыз"
+                nzAllowClear
+                name="university"
+                (change)="chooseUniversity($event)"
+                >
+                <nz-option *ngFor="let university of universities" [nzValue]="university" [nzLabel]="university"></nz-option>
+                </nz-select>
+            </div>
+            <div>
+                <p class="inputLabel">Мамандық <span style="color: red;">*</span></p>
+                    <nz-select
+                formControlName="occupation"
+                nzPlaceHolder="Мамандығыңызды таңдаңыз"
+                nzAllowClear
+                name="occupation"
+                (change)="chooseOccupation($event)"
+                >
+                <nz-option *ngFor="let occupation of occupations" [nzValue]="occupation" [nzLabel]="occupation"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <br class="hidden">
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Курс <span style="color: red;">*</span></p>
+                    <nz-select
+                formControlName="course"
+                nzPlaceHolder="Курс таңдаңыз"
+                nzAllowClear
+                name="course"
+                (change)="chooseCourse($event)"
+                >
+                <nz-option *ngFor="let course of courses" [nzValue]="course" [nzLabel]="course"></nz-option>
+                </nz-select>
+            </div>
+            <div>
+                <p class="inputLabel">GPA <span style="color: red;">*</span></p>
+                <input type="number" name="gpa" id="gpa" class="inputBox" placeholder="GPA жазыңыз" formControlName="gpa">
+            </div>
+        </div>
+        <br class="hidden">
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Транскрипт</p>
+                <label for="transcriptImage">
+                    <div class="inputBox" style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload Image"><span class="uploadFileText">файлды жүктеу</span></div>
+                </label>
+                <p *ngIf="f.transcriptImageSource" style="color: #42855B;">{{transcriptImageName}}</p>
+                <input type="file" name="transcriptImage" id="transcriptImage" style="display: none;" (change)="chooseTranscriptImageFile($event)" formControlName="transcriptImage">
+                <div *ngIf="f.transcriptImage.touched && f.transcriptImage.invalid" class="alert alert-danger">
+                    <div *ngIf="f.transcriptImage.errors?.['required']">File is required.</div>
+                </div>        
+            </div>
+            <div>
+                <p class="inputLabel">Соңғы 3 жылдағы жетістіктер</p>
+                <label for="achievementsImage">
+                    <div class="inputBox" style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload Image"><span class="uploadFileText">файлды жүктеу</span></div>
+                </label>
+                <p *ngIf="f.achievementsImageSource" style="color: #42855B;">{{achievementsImageName}}</p>
+                <input type="file" name="achievementsImage" id="achievementsImage" style="display: none;" (change)="chooseAchievementsImageFile($event)" formControlName="achievementsImage">
+                <div *ngIf="f.achievementsImage.touched && f.achievementsImage.invalid" class="alert alert-danger">
+                    <div *ngIf="f.achievementsImage.errors?.['required']">File is required.</div>
+                </div>        
+            </div>
+        </div>
+        <br class="hidden">
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Облыс / Қала / Аудан / Ауыл * <span style="color: red;">*</span></p>
+                <input type="text" class="inputBox" name="city" id="city" placeholder="Қалаңызды жазыңыз" formControlName="city">
+            </div>
+            <div>
+                <p class="inputLabel">Мектеп <span style="color: red;">*</span></p>
+                <input type="string" class="inputBox" name="school" id="school" placeholder="Мектебіңізді жазыңыз" formControlName="school">
+            </div>
+        </div>
+        <button class="continueButton" (click)="enableStudentFormPage3(); consoleLog()">Әрі қарай</button>
+        <p (click)="enableStudentFormPage1()" class="goBackLink">Артқа</p>
+    </div>
+    <!-- Student Form Page 2 End  -->
+
+    <!-- Student Form Page 3 Begin -->
+    <div *ngIf="thirdPageEnabled">
+        <div class="formProgressImageContainer">
+            <img src="assets\images\Group 1.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\activeRectangle.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\Group 1.png" alt="Form Progress" class="progressBar">
+            <img src="assets\images\activeRectangle.png" alt="Form Progess" class="progressBar">
+            <img src="assets\images\studentSecondPagecurrent.png" alt="Form Progress" class="progressBar">
+        </div>
+    
+        <div class="formInputContainer">
+            <div>
+                <p class="inputLabel">Ағылшын тілі деңгейі <span style="color: red;">*</span></p>
+                <input type="text" name="englishLevel" id="englishLevel" class="inputBox" placeholder="Ағылшын деңгейіңізді жазыңыз" formControlName="englishLevel">
+            </div>
+            <div>
+                <p class="inputLabel">Ағылшын тілі сертификаты <span style="color: red;">*</span></p>
+                <label for="englishCertificateImage">
+                    <div class="inputBox" style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload Image"><span class="uploadFileText">файлды жүктеу</span></div>
+                </label>
+                <p *ngIf="f.englishCertificateImageSource" style="color: #42855B;">{{englishCertificateImageName}}</p>
+                <input type="file" name="englishCertificateImage" id="englishCertificateImage" style="display: none;" (change)="chooseEnglishCertificateImageFile($event)" formControlName="englishCertificateImage">
+                <div *ngIf="f.englishCertificateImage.touched && f.englishCertificateImage.invalid" class="alert alert-danger">
+                    <div *ngIf="f.englishCertificateImage.errors?.['required']">File is required.</div>
+                </div>        
+            </div>
+        </div>
+        <br class="hidden">
+            <div class="socialStatus">
+                <p class="inputLabel">Әлеуметтік жағдайы (көпбалалы отбасы, мүгедектік
+                    толық емес отбасы, тағыда басқа)</p>
+                <label for="socialStatusImage">
+                    <div class="inputBox" style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload Image"><span class="uploadFileText">файлды жүктеу</span></div>
+                </label>
+                <p *ngIf="f.socialStatusImageSource" style="color: #42855B;">{{socialStatusImageName}}</p>
+                <input type="file" name="socialStatusImage" id="socialStatusImage" style="display: none;" (change)="chooseSocialStatusImageFile($event)" formControlName="socialStatusImage">
+                <div *ngIf="f.socialStatusImage.touched && f.socialStatusImage.invalid" class="alert alert-danger">
+                </div>        
+            </div>
+        <div class="essay">
+            <p class="inputLabel">Берілген 2 тақырыптың біріне эссе, </p>
+            <p class="inputLabel" style="margin-top: 5px;">1. Не үшін дәрігер болғым келеді?</p>
+            <p class="inputLabel" style="margin-top: 5px;">2. ALEM MEDICUS-тың стипендианты болуға не үшін лайықтымын? <span style="color: red;">*</span></p>
+            <label for="essayImage">
+                <div class="inputBox" style="padding-top: 10px;"><img src="assets\images\select-file.png" alt="Upload Image"><span class="uploadFileText">файлды жүктеу</span></div>
+            </label>
+            <p *ngIf="f.essayImageSource" style="color: #42855B;">{{essayImageName}}</p>
+            <input type="file" name="essayImage" id="essayImage" style="display: none;" (change)="chooseEssayImageFile($event)" formControlName="essayImage">
+            <div *ngIf="f.essayImage.touched && f.essayImage.invalid" class="alert alert-danger">
+                <div *ngIf="f.essayImage.errors?.['required']">File is required.</div>
+            </div>        
+        </div>
+        <div class="essay">
+            <p class="inputLabel">Қосымша мәлімет/сұрақ</p>
+            <input type="text" class="inputBox" name="additionalQuestion" id="additionalQuestion" formControlName="additionalQuestion">
+        </div>
+        <div style="margin-top: 40px;">
+            <button type="submit" class="submitStudentFormButton" [disabled]="!studentForm.valid">Жіберу</button>
+            <p (click)="enableStudentFormPage2()" class="goBackLink" style="top: 20px;">Артқа</p>
+        </div>
+    </div>
+    <!-- Student Form Page 3 End -->
 </form>

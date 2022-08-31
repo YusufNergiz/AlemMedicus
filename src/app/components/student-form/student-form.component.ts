@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ToastService } from 'angular-toastify';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { uuidv4 } from '@firebase/util';
 
 
 @Component({
@@ -9,50 +13,275 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['./student-form.component.css']
 })
 export class StudentFormComponent implements OnInit {
+  // Student Form all Fields
+  studentForm = new FormGroup({
+    // Page 1
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    fatherName: new FormControl('', [Validators.required]),
+    gender: new FormControl('', [Validators.required]),
+    iin: new FormControl('', [Validators.required]),
+    idImage: new FormControl('', [Validators.required]),
+    idImageSource: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required]),
+    // Page 2
+    university: new FormControl('', [Validators.required]),
+    occupation: new FormControl('', [Validators.required]),
+    course: new FormControl('', [Validators.required]),
+    gpa: new FormControl('', [Validators.required]),
+    transcriptImage: new FormControl('', [Validators.required]),
+    transcriptImageSource: new FormControl('', [Validators.required]),
+    achievementsImage: new FormControl('', [Validators.required]),
+    achievementsImageSource: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required]),
+    school: new FormControl('', [Validators.required]),
+    // Page 3
+    englishLevel: new FormControl('', [Validators.required]),
+    englishCertificateImage: new FormControl('', [Validators.required]),
+    englishCertificateImageSource: new FormControl('', [Validators.required]),
+    socialStatusImage: new FormControl(''),
+    socialStatusImageSource: new FormControl(''),
+    essayImage: new FormControl('', [Validators.required]),
+    essayImageSource: new FormControl('', [Validators.required]),
+    additionalQuestion: new FormControl('')
+  })
+  //
 
-  genders = [{value: 'male', label: 'Ep'}, {value: 'female', label: 'Қыз'}]
+  // Image Names for displaying it under the input boxes
+  idImageName!: string;
+  transcriptImageName!: string;
+  achievementsImageName!: string;
+  englishCertificateImageName!: string;
+  socialStatusImageName!: string;
+  essayImageName!: string;
+  //
 
-  date!: string;
-// First Page Input Values
-  firstName!: string;
-  lastName!: string;
-  fatherName!: string;
-  gender!: string;
-  iin!: number;
-  idImage: any;
-  
-//
-  countries = [
-    { code: "+7", name: "Kazakhstan" },
-    { code: "+12", name: "United States" },
-    { code: "+13", name: "Australia" },
-    { code: "+14", name: "Canada" },
-    { code: "+15", name: "Brazil" },
-    { code: "+16", name: "England" }
-  ];
+  genders = ['Ep', 'Қыз']
+  universities = ['Al-Farabi Kazakh National University', 'Nazarbayev University', 'L.N. Gumilyov Eurasian National University', 'Karaganda State Technical University', 'Satbayev University']
+  occupations = ['Student', 'Doctor', 'Nurse', 'Proffessor', 'Unemployed']
+  courses = [1, 2, 3, 4, 5]
+
   selectedValue: any;
 
-  constructor(private msg: NzMessageService) { }
+  // Conditionally rendering form pages --- Enabled/Disabled
+  firstPageEnabled: boolean = true;
+  secondPageEnabled: boolean = false;
+  thirdPageEnabled: boolean = false;
+  //
 
-  ngOnInit(): void {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
+  ////////////////////
+  allImageUrls: any[] = []
+  ///////////////////
 
-    this.date = dd + '/' + mm + '/' + yyyy;
+  constructor(private msg: NzMessageService, private toast: ToastService, private afs: AngularFirestore) { }
+
+  @Output() studentFormFirstPageData: EventEmitter<object> = new EventEmitter()
+
+  ngOnInit(): void { 
   }
 
-  handleChange(info: NzUploadChangeParam): void {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file);
+  // Conditionally rendering form pages --- Change Form Page
+  enableStudentFormPage2() {  // <-- Turning into the second form page
+    this.firstPageEnabled = false
+    this.secondPageEnabled = true
+    this.thirdPageEnabled = false
+  }
+
+  enableStudentFormPage1() {
+    this.firstPageEnabled = true
+    this.secondPageEnabled = false  
+  }
+
+  enableStudentFormPage3() {
+    this.secondPageEnabled = false
+    this.thirdPageEnabled = true
+  }
+  //
+
+  get f(){
+    return this.studentForm.controls;
+  }
+
+  // Gets the inputted file
+  chooseIdImageFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.studentForm.patchValue({
+        idImageSource: file
+      })
+      this.idImageName = file.name
     }
-    if (info.file.status === 'done') {
-      this.msg.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      this.msg.error(`${info.file.name} file upload failed.`);
+  }
+  chooseTranscriptImageFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.studentForm.patchValue({
+        transcriptImageSource: file
+      })
+      this.transcriptImageName = file.name
     }
   }
 
+  chooseAchievementsImageFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.studentForm.patchValue({
+        achievementsImageSource: file
+      })
+      this.achievementsImageName = file.name
+    }
+  }
+
+  chooseEnglishCertificateImageFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.studentForm.patchValue({
+        englishCertificateImageSource: file
+      })
+      this.englishCertificateImageName = file.name
+    }
+  }
+
+  chooseSocialStatusImageFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.studentForm.patchValue({
+        socialStatusImageSource: file
+      })
+      this.socialStatusImageName = file.name
+    }
+  }
+
+  chooseEssayImageFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.studentForm.patchValue({
+        essayImageSource: file
+      })
+      this.essayImageName = file.name
+    }
+  }
+
+  
+
+  chooseGender(event: any) {
+    this.studentForm.patchValue({
+      gender: event.target.value
+    })
+  }
+
+  chooseUniversity(event: any) {
+    this.studentForm.patchValue({
+      university: event.target.value
+    })
+  }
+
+  chooseOccupation(event: any) {
+    this.studentForm.patchValue({
+      occupation: event.target.value
+    })
+  }
+
+  chooseCourse(event: any) {
+    this.studentForm.patchValue({
+      course: event.target.value
+    })
+  }
+
+  // Function To Upload files to Firebase Storage and get the DownloadUrl
+  async fileUploadToFirestore(file: any) {
+    const storage = getStorage();
+    
+    const storageRef = ref(storage, 'studentData/' + file.name + this.studentForm.get('firstName')?.value);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      }, 
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/unauthorized':
+            this.toast.error("User doesn't have permission to access the object")
+            break;
+          case 'storage/canceled':
+            this.toast.error("User canceled the upload")
+            break;
+    
+          // ...
+    
+          case 'storage/unknown':
+            this.toast.error("Unknown error occurred, inspect error.serverResponse")
+            break;
+        }
+      }, 
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          this.allImageUrls.push(downloadURL)
+        });
+      }
+    );
+  }
+  //
+
+  sendStudentDataToFirestore(id: any, studentData: any) {
+    return this.afs.collection('students').doc(id).set(studentData)
+  }
+
+  // Student Form Submittion
+  async onStudentFormSubmit() {
+    this.fileUploadToFirestore(this.studentForm.get('idImageSource')?.value)
+    console.log(this.allImageUrls)
+    this.fileUploadToFirestore(this.studentForm.get('transcriptImageSource')?.value)
+    console.log(this.allImageUrls)
+    this.fileUploadToFirestore(this.studentForm.get('achievementsImageSource')?.value)
+    console.log(this.allImageUrls)
+    this.fileUploadToFirestore(this.studentForm.get('englishCertificateImageSource')?.value)
+    console.log(this.allImageUrls)
+    this.fileUploadToFirestore(this.studentForm.get('socialStatusImageSource')?.value)
+    console.log(this.allImageUrls)
+    this.fileUploadToFirestore(this.studentForm.get('essayImageSource')?.value)
+    const randomId = uuidv4()
+
+    const studentDataClone = {
+      studentId: randomId,
+      firstName: this.studentForm.get('firstName')?.value,
+      lastname: this.studentForm.get('lastName')?.value,
+      fatherName: this.studentForm.get('fatherName')?.value,
+      gender: this.studentForm.get('gender')?.value,
+      iin: this.studentForm.get('iin')?.value,
+      email: this.studentForm.get('email')?.value,
+      phoneNumber: this.studentForm.get('phoneNumber')?.value,
+      university: this.studentForm.get('university')?.value,
+      occupation: this.studentForm.get('occupation')?.value,
+      course: this.studentForm.get('course')?.value,
+      gpa: this.studentForm.get('gpa')?.value,
+      city: this.studentForm.get('city')?.value,
+      school: this.studentForm.get('school')?.value,
+      englishLevel: this.studentForm.get('englishLevel')?.value,
+      additionalQuestion: this.studentForm.get('additionalQuestion')?.value,
+      allFiles: this.allImageUrls,
+    }
+
+    await this.sendStudentDataToFirestore(randomId, studentDataClone)
+  }
+  //
+                 ///////////////////// The allFiles array is empty in firebase firestore!! Fix that
+  consoleLog() { 
+    console.log(this.allImageUrls) 
+  }
 
 }

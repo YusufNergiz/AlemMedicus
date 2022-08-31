@@ -17,6 +17,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { UploadOutline } from '@ant-design/icons-angular/icons'
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -47,6 +48,9 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 registerLocaleData(en);
 
@@ -111,6 +115,10 @@ const appRoutes: Routes = [
   }
 ]
 
+const icons: IconDefinition[] = [
+  UploadOutline
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,6 +142,7 @@ const appRoutes: Routes = [
     UpdateArchiveComponent,
     ArchiveComponent,
     AllNewsComponent,
+    ImageUploadComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -156,7 +165,8 @@ const appRoutes: Routes = [
     NzInputModule,
     NzFormModule,
     NzSelectModule,
-    NzUploadModule 
+    NzUploadModule,
+    NzIconModule.forChild(icons),
  ],
   providers: [ToastService, { provide: NZ_I18N, useValue: en_US }, {provide: NzMessageService}],  
   bootstrap: [AppComponent]

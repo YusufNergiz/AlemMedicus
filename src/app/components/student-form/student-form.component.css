@@ -49,6 +49,14 @@
     line-height: 12px;
     color: #303030;
     margin-bottom: -1px;
+    width: 290px;
+}
+
+@media only screen and (max-width: 600px) {
+    .inputLabel {
+        margin: auto;
+        text-align: left;
+    }
 }
 
 .inputBox {
@@ -126,4 +134,125 @@ nz-upload {
     padding-left: 10px;
     align-items: center;
     color: #00B0B9;
+}
+
+.continueButton {
+    position: relative;
+    width: 198px;
+    height: 50px;
+    top: 150px;
+    left: 239px;
+    background: #00B0B9;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+.disabledContinueButton {
+    position: relative;
+    width: 198px;
+    height: 50px;
+    left: 239px;
+    top: 200px;
+    background: #00B0B9;
+    opacity: 0.4;
+    border-radius: 30px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+}
+
+@media only screen and (max-width: 600px) {
+    .continueButton {
+        left: 90px;
+        top: 70px;
+    }
+    .disabledContinueButton {
+        left: 90px;
+        top: 70px;
+    }
+}
+
+.goBackLink {
+    position: relative;
+    top: 160px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.02em;
+    text-decoration-line: underline;
+    color: #00B0B9;
+    cursor: pointer;
+}
+
+.socialStatus {
+    margin-top: 50px;
+    margin-left: 16px;
+}
+
+.essay {
+    margin-top: 25px;
+    margin-left: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+    .socialStatus {
+        display: block;
+        text-align: center;
+        margin-left: 0;
+    }
+    .socialStatus * {
+        padding-top: 10px;
+    }
+    .essay {
+        display: block;
+        text-align: center;
+        margin-left: 0;
+    }
+    .goBackLink {
+        top: 80px;
+    }
+}
+
+.submitStudentFormButton {
+    position: relative;
+    width: 198px;
+    height: 50px;
+    top: 10px;
+    left: 239px;
+    background: #00B0B9;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .submitStudentFormButton {
+        left: 90px;
+        top: 10px;
+    }
 }

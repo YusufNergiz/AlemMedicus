@@ -126,7 +126,7 @@ export class CreateNewsComponent implements OnInit {
         newsId: uuid()
       }
       this.uploadNewsToFirestore(newsObject)
-      this.router.navigate(['/admin'])
+      this.router.navigate(['/'])
       this.toast.success("News successfully has been uploaded!")
     });
   }

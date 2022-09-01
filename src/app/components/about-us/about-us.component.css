@@ -1,0 +1,179 @@
+.aboutUsImage {
+    width: 300px;
+    height: 350px;
+    border-radius: 30px 0px 0px 30px;
+}
+
+.aboutUsTitle {
+    width: 853px;
+    height: 76px;
+    left: 510px;
+    top: 244px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    color: #303030;
+}
+
+.ourMissionTitle {
+    width: 264px;
+    height: 34px;
+    left: 510px;
+    top: 356px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 34px;
+    color: black;
+}
+
+.ourMissionText {
+    width: 880px;
+    height: 68px;
+    left: 510px;
+    top: 406px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 34px;
+    color: #303030;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .ourMissionTitle {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ourMissionText {
+        width: 100%;
+        height: 100%;
+    }
+
+    .aboutUsTitle {
+        margin-top: 25px;
+        width: 100%;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 20px;
+    }
+
+    .aboutUsContainer {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .aboutUsImage {
+        width: 366px;
+        height: 413px;
+    }
+
+    .ourMissionContainer {
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+.differenceTitle {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 42px;
+    color: black;
+    margin-top: 15px;
+}
+
+.frameContainer {
+    text-align: center;
+    justify-content: center;
+    width: 320px;
+}
+
+.frameContainer2 {
+    text-align: center;
+    justify-content: center;
+    width: 320px;
+}
+
+.frame {
+    width: 118px;
+    height: 118px;
+    left: 258px;
+    top: 811px;
+    filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.1));
+    border-radius: 30px;
+}
+
+.bigFrame {
+    width: 170px;
+    height: 170px;
+    left: 522px;
+    top: 1050px;
+    filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.1));
+    border-radius: 30px;
+}
+
+.frameText {
+    width: 350px;
+    height: 68px;
+    left: 131px;
+    top: 943px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 34px;
+    text-align: center;
+    color: #303030;
+}
+
+.secondFrameContainer {
+    width: 600px;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .frameContainer {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .secondFrameContainer {
+        width: 100%;
+    }
+
+    .frameContainer2 {
+        width: 100%;
+    }
+
+    .frameText {
+        padding-left: 15px;
+    }
+
+    .hidden {
+        display: none;
+    }
+}
+
+.collapseContainer {
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    filter: drop-shadow(0px 5px 30px rgba(0, 0, 0, 0.1));
+    border-radius: 30px;
+    padding: 35px 25px;
+}
+
+.collapseText {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    color: rgba(60, 60, 67, 0.85);
+}
+

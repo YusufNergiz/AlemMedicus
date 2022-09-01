@@ -5,16 +5,19 @@
     height: 100%;
     width: 80px;
     background-color: #FBFBFD;
+    z-index: 2;
 }
 
 .adminNavbarIcons {
     margin-top: 170px;
+    z-index: 3;
 }
 
 .adminNavbarIcon {
     position: relative;
     top: 0;
     transition: top ease 0.5s;
+    z-index: 4;
 }
 
 .adminNavbarIcon:hover {

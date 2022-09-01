@@ -49,7 +49,7 @@ export class UpdateArchiveComponent implements OnInit {
     await this.afs.collection('archive').doc(this.currentNewsId).ref.get().then((doc) => {
       if (doc.exists) {
         this.news = doc.data()
-        this.defaultImage = this.news.imageUrl
+        this.defaultImage = this.news.imageUrls
         this.newsTitle = this.news.title
         this.newsContent = this.news.content
         this.loading = false
@@ -98,7 +98,7 @@ export class UpdateArchiveComponent implements OnInit {
     this.toast.success("News Successfully Deleted!")
   }
 
-  updateNewsButton() {
+  updateNewsImage() {
     const storageRef = ref(this.storage, 'images/' + this.file.name);
     const uploadTask = uploadBytesResumable(storageRef, this.file);
 
@@ -144,6 +144,20 @@ export class UpdateArchiveComponent implements OnInit {
     this.toast.success("News Successfully Updated")
   }
 );
+  }
+
+  updateNewsButton() {
+    if (this.file) {
+      return this.updateNewsImage()
+    }
+    else {
+      const ref = doc(this.firestore, 'archive', this.news.newsId)
+      return from(updateDoc(ref, {
+        title: this.newsTitle,
+        content: this.newsContent,
+        date: serverTimestamp()
+      }))
+    }
   }
 
 }

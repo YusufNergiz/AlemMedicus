@@ -1,20 +1,47 @@
 <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col">Имя</th>
-        <th scope="col">Фамилия</th>
-        <th scope="col">Отчество</th>
-        <th>Пол</th>
-        <th>ИИН</th>
+        <th>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectNumber1" class="studentDataSelect">
+                <nz-option *ngFor="let field of studentDataFields" nzLabel="{{field.label}}" nzValue="{{field.value}}"></nz-option>
+              </nz-select>
+        </th>
+        <th>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectNumber2" class="studentDataSelect">
+                <nz-option *ngFor="let field of studentDataFields" nzLabel="{{field.label}}" nzValue="{{field.value}}"></nz-option>
+              </nz-select>
+        </th>
+        <th>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectNumber3" class="studentDataSelect">
+                <nz-option *ngFor="let field of studentDataFields" nzLabel="{{field.label}}" nzValue="{{field.value}}"></nz-option>
+              </nz-select>
+        </th>
+        <th>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectNumber4" class="studentDataSelect">
+                <nz-option *ngFor="let field of studentDataFields" nzLabel="{{field.label}}" nzValue="{{field.value}}"></nz-option>
+              </nz-select>
+        </th>
+        <th>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectNumber5" class="studentDataSelect">
+                <nz-option *ngFor="let field of studentDataFields" nzLabel="{{field.label}}" nzValue="{{field.value}}"></nz-option>
+              </nz-select>
+        </th>
+        <th>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectNumber6" class="studentDataSelect">
+                <nz-option *ngFor="let file of studentFileDataFields" nzLabel="{{file.label}}" nzValue="{{file.value}}"></nz-option>
+              </nz-select>
+        </th>
+        
       </tr>
     </thead>
     <tbody *ngFor="let student of students | async; let i = index">
       <tr style="cursor: pointer;">
-        <td>{{student.firstName}}</td>
-        <td>{{student.lastName}}</td>
-        <td>{{student.fatherName}}</td>
-        <td>{{student.gender}}</td>
-        <td>{{student.iin}}</td>
+        <td style="height: 50px; width: 300px;">{{student[selectNumber1]}}</td>
+        <td>{{student[selectNumber2]}}</td>
+        <td>{{student[selectNumber3]}}</td>
+        <td>{{student[selectNumber4]}}</td>
+        <td>{{student[selectNumber5]}}</td>
+        <td><a href="{{student['allFiles'][selectNumber6]?.url}}">{{selectNumber6 ? 'file.pdf' : ''}}</a></td>
       </tr>
     </tbody>
   </table>

@@ -63,3 +63,16 @@
     position: relative;
     right: 25px;
 }
+
+.exportExcelButton {
+    position: fixed;
+    right: 24px;
+    top: 130px;
+    cursor: pointer;
+}
+
+.logOutButton {
+    position: fixed;
+    right: 24px;
+    top: 90px;
+}

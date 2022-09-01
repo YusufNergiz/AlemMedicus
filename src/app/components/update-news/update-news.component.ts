@@ -116,7 +116,7 @@ export class UpdateNewsComponent implements OnInit {
     this.toast.success("News Successfully added to Archive")
   }
 
-  updateNewsButton() {
+  updateNewsImage() {
 
     const storageRef = ref(this.storage, 'images/' + this.file.name);
     const uploadTask = uploadBytesResumable(storageRef, this.file);
@@ -163,6 +163,21 @@ export class UpdateNewsComponent implements OnInit {
     this.toast.success("News Successfully Updated")
   }
 );
+  }
+
+  updateNewsButton() {
+
+    if (this.file) {
+      return this.updateNewsImage()
+    }
+    else {
+      const ref = doc(this.firestore, 'news', this.news.newsId)
+      return from(updateDoc(ref, {
+        title: this.newsTitle,
+        content: this.newsContent,
+        date: serverTimestamp()
+    }))
+    }
   }
 
 }

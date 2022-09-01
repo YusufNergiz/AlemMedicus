@@ -3,6 +3,9 @@
 <div class="container mt-5">
     <div>
         <div class="row">
+            <div>
+                <button class="btn btn-outline-warning logOutButton" (click)="logOut()">Log out</button>
+            </div>
             <h3 class="col-md-1 col-6 adminHeader">Новости</h3>
             <button class="col-md-2 col-6 ms-4 createNewsButton" (click)="createNewsPage()">Создать новость</button>
         </div>
@@ -23,6 +26,9 @@
             <app-archive-table *ngIf="archiveLinkToggled"></app-archive-table>
         </div>
         <div class="mt-5" *ngIf="studentsDataPageEnabled">
+            <div>
+                <img src="assets\images\exportExcelButton.png" alt="Export Excel Button" (click)="exportStudentDataAsExcel()" class="exportExcelButton">
+            </div>
             <app-students-table></app-students-table>
         </div>
     </div>

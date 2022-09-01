@@ -205,13 +205,13 @@ export class StudentFormComponent implements OnInit {
 
   // Function To Upload files to Firebase Storage and get the DownloadUrl
   ////////////////////////////////
-  async uplaodImage(file: any) {
+  async uplaodImage(fileName: string, file: any) {
     return new Promise((resolve, reject) => {
       const storage = getStorage()
 
       const storageRef = ref(storage, 'studentData/' + file.name + this.studentForm.get('firstName')?.value)
 
-      const uploadTask = uploadBytesResumable(storageRef, file  )
+      const uploadTask = uploadBytesResumable(storageRef, file)
 
       uploadTask.on('state_changed',
         (snapshot) => {
@@ -249,7 +249,7 @@ export class StudentFormComponent implements OnInit {
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            resolve(downloadURL)
+            resolve({fileName: fileName, url: downloadURL})
           });
         }
       );
@@ -264,8 +264,13 @@ export class StudentFormComponent implements OnInit {
 
   // Student Form Submittion
   async onStudentFormSubmit() {
-    const allFiles = [this.studentForm.get('idImageSource')?.value, this.studentForm.get('transcriptImageSource')?.value, this.studentForm.get('achievementsImageSource')?.value, this.studentForm.get('englishCertificateImageSource')?.value, this.studentForm.get('socialStatusImageSource')?.value, this.studentForm.get('essayImageSource')?.value,]
-    const fileUrls = await Promise.all([...allFiles].map((file) => this.uplaodImage(file)))
+    const allFiles = [{fileName: 'idImage', file: this.studentForm.get('idImageSource')?.value},
+     {fileName: "transcriptImage", file: this.studentForm.get('transcriptImageSource')?.value},
+      {fileName: "achievementsImage", file: this.studentForm.get('achievementsImageSource')?.value},
+       {fileName: "englishCertificateImage", file: this.studentForm.get("englishCertificateImageSource")?.value},
+        {fileName: "socialStatusImage", file: this.studentForm.get('socialStatusImageSource')?.value},
+         {fileName: "essayImage", file: this.studentForm.get('essayImageSource')?.value,}]
+    const fileUrls = await Promise.all([...allFiles].map((file) => this.uplaodImage(file.fileName, file.file)))
     const randomId = uuidv4()
 
     const studentDataClone = {

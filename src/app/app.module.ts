@@ -18,6 +18,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadOutline } from '@ant-design/icons-angular/icons'
+import { ExcelServiceService } from './services/excel-service.service';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -52,6 +53,9 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { StudentsTableComponent } from './components/students-table/students-table.component';
+import { SponsorComponent } from './components/sponsor/sponsor.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 registerLocaleData(en);
 
@@ -113,6 +117,14 @@ const appRoutes: Routes = [
   {
     path: 'all-news',
     component: AllNewsComponent
+  },
+  {
+    path: 'sponsor',
+    component: SponsorComponent
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent
   }
 ]
 
@@ -146,6 +158,8 @@ const icons: IconDefinition[] = [
     ImageUploadComponent,
     StudentsTableComponent,
     StudentsTableComponent,
+    SponsorComponent,
+    AboutUsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -170,8 +184,10 @@ const icons: IconDefinition[] = [
     NzSelectModule,
     NzUploadModule,
     NzIconModule.forChild(icons),
+    NzCollapseModule
+    
  ],
-  providers: [ToastService, { provide: NZ_I18N, useValue: en_US }, {provide: NzMessageService}],  
+  providers: [ToastService, { provide: NZ_I18N, useValue: en_US }, {provide: NzMessageService}, ExcelServiceService],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

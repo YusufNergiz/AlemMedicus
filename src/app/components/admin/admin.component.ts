@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { StudentsTableComponent } from '../students-table/students-table.component';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +16,7 @@ export class AdminComponent implements OnInit {
   studentsDataPageEnabled: boolean = false
   newsDataPageEnabled: boolean = true
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private user: UserService) { }
 
   ngOnInit(): void {
   }
@@ -40,7 +42,17 @@ export class AdminComponent implements OnInit {
 
   studentsDataPageToggle() {
     this.studentsDataPageEnabled = true
-    this.newsDataPageEnabled = false
+    this.newsDataPageEnabled = false  
+  }
+
+  @ViewChild(StudentsTableComponent) child:StudentsTableComponent | undefined;
+
+  exportStudentDataAsExcel() {
+    this.child?.exportAsXLSX()
+  }
+
+  logOut() {
+    this.user.logout()
   }
 
 }

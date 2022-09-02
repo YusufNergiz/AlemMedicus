@@ -12,8 +12,18 @@ export class NewsTableComponent implements OnInit {
 
   news: Observable<any>
 
+  inputValue?: string;
+  filteredOptions: string[] = [];
+  options: any[] = [];
+
   constructor(private fbs: AngularFirestore, private router: Router) { 
     this.news = fbs.collection('news').valueChanges()
+    this.news.subscribe((news) => {
+      news.map((n: any) => {
+        this.options.push(n.title)
+      })
+    })
+    this.filteredOptions = this.options;
   }
 
   ngOnInit(): void {
@@ -21,6 +31,11 @@ export class NewsTableComponent implements OnInit {
 
   navigateToUpdateNews(newsId: string) {
     this.router.navigate([`/update-news/${newsId}`])
+  }
+
+
+  onChange(value: string): void {
+    this.filteredOptions = this.options.filter(option => option.toLowerCase().indexOf(value.toLowerCase()) !== -1);
   }
 
 }

@@ -56,6 +56,7 @@ import { StudentsTableComponent } from './components/students-table/students-tab
 import { SponsorComponent } from './components/sponsor/sponsor.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 registerLocaleData(en);
 
@@ -184,7 +185,8 @@ const icons: IconDefinition[] = [
     NzSelectModule,
     NzUploadModule,
     NzIconModule.forChild(icons),
-    NzCollapseModule
+    NzCollapseModule,
+    NzAutocompleteModule
     
  ],
   providers: [ToastService, { provide: NZ_I18N, useValue: en_US }, {provide: NzMessageService}, ExcelServiceService],  

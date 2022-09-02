@@ -1,12 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { StudentsTableComponent } from '../students-table/students-table.component';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AdminComponent implements OnInit {
 
@@ -16,7 +19,10 @@ export class AdminComponent implements OnInit {
   studentsDataPageEnabled: boolean = false
   newsDataPageEnabled: boolean = true
 
-  constructor(private router: Router, private user: UserService) { }
+  searchBarValue: any;
+
+  constructor(private router: Router, private user: UserService) {
+   }
 
   ngOnInit(): void {
   }
@@ -45,10 +51,10 @@ export class AdminComponent implements OnInit {
     this.newsDataPageEnabled = false  
   }
 
-  @ViewChild(StudentsTableComponent) child:StudentsTableComponent | undefined;
+  @ViewChild(StudentsTableComponent) studentTableChild:StudentsTableComponent | undefined;
 
   exportStudentDataAsExcel() {
-    this.child?.exportAsXLSX()
+    this.studentTableChild?.exportAsXLSX()
   }
 
   logOut() {

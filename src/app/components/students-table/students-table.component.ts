@@ -21,6 +21,12 @@ export class StudentsTableComponent implements OnInit {
 
   allStudents: any[] = []
 
+  // Serach Bar
+  inputValue?: string;
+  filteredOptions: any[] = [];
+  options: any[] = [];
+  //
+
   studentDataFields = [{label: "Имя", value: "firstName"},
    {label: "Фамилия", value: "lastname"},
    {label: "Отчество", value: "fatherName"},
@@ -53,6 +59,7 @@ export class StudentsTableComponent implements OnInit {
     this.students = afs.collection('students').valueChanges()
     this.students.subscribe((students) => {
       students.map((student: any) => {
+        this.options.push(student.iin)
         this.allStudents.push({
           "Имя": student.firstName,
           "Фамилия": student.lastname,
@@ -71,6 +78,7 @@ export class StudentsTableComponent implements OnInit {
         })
       })
     })
+    this.filteredOptions = this.options;
     }
 
   ngOnInit(): void {
@@ -78,6 +86,10 @@ export class StudentsTableComponent implements OnInit {
 
   exportAsXLSX():void {
     this.excelService.exportAsExcelFile(this.allStudents, 'students_data');
+  }
+
+  onChange(value: string): void {
+    this.filteredOptions = this.options.filter(option => option.toLowerCase().indexOf(value.toLowerCase()) !== -1);
   }
 
 }

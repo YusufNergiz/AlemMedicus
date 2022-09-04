@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-all-news',
@@ -10,13 +11,19 @@ import { Observable } from 'rxjs';
 })
 export class AllNewsComponent implements OnInit {
 
-archive: Observable<any>
+archive!: Observable<any>
 
-  constructor(private afs: AngularFirestore, private router: Router) {
-    this.archive = afs.collection('archive').valueChanges()
+  constructor(private afs: AngularFirestore, private router: Router, private spinner: NgxSpinnerService) {
+    spinner.show()
    }
 
   ngOnInit(): void {
+    this.fetchArchiveData()
+  }
+
+  async fetchArchiveData() {
+    this.archive = this.afs.collection('archive').valueChanges()
+    await this.spinner.hide()
   }
 
   navigateToArchiveNews(newsId: string) {

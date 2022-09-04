@@ -1,4 +1,6 @@
-* {box-sizing:border-box}
+* {
+  box-sizing:border-box;
+}
 
 /* Slideshow container */
 .slideshow-container {
@@ -95,7 +97,7 @@
 
 @media only screen and (max-width: 600px) {
   .arrowDownButton {
-    bottom: 50px;
+    bottom: 15px;
     left: 180px;
   }
 }
@@ -105,17 +107,17 @@
   background-color: white;
   border-radius: 25px;
   height: 480px;
-  width: 322px;
+  width: 110%;
 }
 
 @media only screen and (max-width: 600px) {
   .newsContainer {
-      margin-top: 10px;
-      display: inline-block;
-      justify-content: space-between;
-      height: 450px;
-      width: 370px;
-      margin-left: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    justify-content: space-between;
+    height: fit-content;
+    width: 100%;
+    margin: 0 auto;
   }
   .newsContainer {
       padding: 0 20px;
@@ -338,7 +340,8 @@
 }
 
 .news-item-image {
-  width: 260px;
+  margin-left: 20px;
+  width: 90%;
   height: 165px;
   border-radius: 30px;
 }
@@ -354,11 +357,8 @@
 
 @media only screen and (max-width: 600px) {
   .news-item-image {
-      margin-top: 10px;
-      padding-top: 20px;
-      margin-left: 10px;
-      width: 350px;
-      height: 150px;
+    margin-left: 0;
+      width: 100%;
   }
 }
 
@@ -380,7 +380,8 @@
 
 @media only screen and (max-width: 600px) {
   .news-item-title {
-      font-size: 12px;
+      padding-top: 10px;
+      font-size: 24px;
       line-height: 16px;
       margin-left: 5px;
   }
@@ -399,6 +400,7 @@
 
 @media only screen and (max-width: 600px) {
   .news-item-time {
+    padding-top: 10px;
       margin-left: 5px;
   }
 }

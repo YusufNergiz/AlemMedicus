@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-archive',
@@ -15,16 +17,11 @@ export class ArchiveComponent implements OnInit {
 
   news: any;
 
-  loading: boolean = true
-  
   archive: any[] = []
 
-  constructor(private activatedRoute: ActivatedRoute, private firestore: Firestore, private afs: AngularFirestore, private toast: ToastService, private router: Router) { 
+  constructor(private activatedRoute: ActivatedRoute, private firestore: Firestore, private afs: AngularFirestore, private toast: ToastService, private router: Router, private spinner: NgxSpinnerService) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    afs.collection('archive').valueChanges()
-    .subscribe(item => {
-      this.archive = item
-    })
+    spinner.show()
   }
 
   ngOnInit(): void {
@@ -40,12 +37,16 @@ export class ArchiveComponent implements OnInit {
     await this.afs.collection('archive').doc(this.currentNewsId).ref.get().then((doc) => {
       if (doc.exists) {
         this.news = doc.data()
-        this.loading = false
       }
       else {
         this.toast.error("News Does Not Exists!!")
         this.router.navigate(['/'])
       }
+    })
+    this.afs.collection('archive').valueChanges()
+    .subscribe(item => {
+      this.archive = item
+      this.spinner.hide()
     })
   }
 

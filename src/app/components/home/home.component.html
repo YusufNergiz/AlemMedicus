@@ -1,3 +1,4 @@
+<ngx-spinner bdColor = "rgba(51,51,51,0.8)" size = "medium" color = "#fff" type = "ball-newton-cradle" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
 <app-navbar></app-navbar>
 <lib-toastify-toast-container></lib-toastify-toast-container>
 <section>
@@ -10,20 +11,19 @@
               <app-carousel-pause></app-carousel-pause>
           </div>
           <div class="col-md-3 col-sm-4 col-xs-12">
-              <div class="newsContainer">
-                <div class="news-item1" *ngFor="let item of archive | slice:0 : 2"> 
-                  <div (click)="navigateToNews(item.newsId)">
-                    <img src={{item.imageUrl}} alt="News Image" class="img-fluid news-item-image">
-                    <h5 class="news-item-title">{{item.title}}</h5>
-                    <p class="news-item-time">{{item.date?.toDate() | date:'dd/MM/yyyy'}}</p>
-                  </div>
+            <div class="newsContainer">
+              <div *ngFor="let item of archive | slice:0 : 2" (click)="navigateToNews(item.newsId)" style="cursor: pointer;">
+                <img src={{item.imageUrl}} alt="News Image" class="news-item-image">
+                <h5 class="news-item-title">{{item.title}}</h5>
+                <p class="news-item-time">{{item.date?.toDate() | date:'dd/MM/yyyy'}}</p>
               </div>
+              <img src="assets\images\arrow-down.png" alt="Arrow Down" class="arrowDownButton"(click)=navigateToArchive() style="cursor: pointer;">
+          </div>
               <br>
             </div>
-            <img src="assets\images\arrow-down.png" alt="Arrow Down" class="arrowDownButton" (click)="navigateToArchive()">
           </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" style="width: 100%; margin: auto;">
           <div class="col-md-4 col-sm-8 col-xs-12">
             <div class="contacts">
               <h4 class="contactTitle">Контакты для связи:</h4>
@@ -50,6 +50,5 @@
           </div>
         </div>
       </div>
-    </div>
 </section>
 

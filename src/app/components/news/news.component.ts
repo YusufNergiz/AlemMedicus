@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
-import { doc, getDoc } from "firebase/firestore";
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -21,7 +21,7 @@ export class NewsComponent implements OnInit {
 
   archive: any[] = []
 
-  constructor(private activatedRoute: ActivatedRoute, private firestore: Firestore, private afs: AngularFirestore, private toast: ToastService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private firestore: Firestore, private afs: AngularFirestore, private toast: ToastService, private router: Router, private spinner: NgxSpinnerService) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     afs.collection('archive').valueChanges()
     .subscribe(item => {
@@ -30,7 +30,7 @@ export class NewsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-      this.fetchNewsData()
+    this.fetchNewsData()
   }
 
   async fetchNewsData() {

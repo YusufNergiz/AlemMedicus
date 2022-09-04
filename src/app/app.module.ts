@@ -57,6 +57,10 @@ import { SponsorComponent } from './components/sponsor/sponsor.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+
+
 
 registerLocaleData(en);
 
@@ -186,9 +190,11 @@ const icons: IconDefinition[] = [
     NzUploadModule,
     NzIconModule.forChild(icons),
     NzCollapseModule,
-    NzAutocompleteModule
+    NzAutocompleteModule,
+    NgxSpinnerModule.forRoot({type: 'ball-scale-ripple'})
     
  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ToastService, { provide: NZ_I18N, useValue: en_US }, {provide: NzMessageService}, ExcelServiceService],  
   bootstrap: [AppComponent]
 })

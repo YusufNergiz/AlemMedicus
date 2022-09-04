@@ -49,14 +49,15 @@
   }
   
   .news-item-image {
-    width: 260px;
+    margin-left: 20px;
+    width: 90%;
     height: 165px;
     border-radius: 30px;
   }
   
   @media only screen and (max-width: 600px) {
     .news-item1 {
-        margin-right: 10px;
+        padding-top: 25px;
         height: 100px;
     }
     .news-item2 {
@@ -69,11 +70,8 @@
   
   @media only screen and (max-width: 600px) {
     .news-item-image {
-        margin-top: 10px;
-        padding-top: 20px;
-        margin-left: 10px;
-        width: 350px;
-        height: 150px;
+      margin-left: 0;
+      width: 100%;
     }
   }
   
@@ -95,7 +93,8 @@
   
   @media only screen and (max-width: 600px) {
     .news-item-title {
-        font-size: 12px;
+        font-size: 24px;
+        padding-top: 10px;
         line-height: 15px;
         margin-left: 5px;
     }
@@ -115,6 +114,7 @@
   @media only screen and (max-width: 600px) {
     .news-item-time {
         margin-left: 5px;
+        padding-top: 10px;
     }
   } 
 
@@ -123,7 +123,7 @@
     background-color: white;
     border-radius: 25px;
     height: 480px;
-    width: 322px;
+    width: 110%;
   }
   
   @media only screen and (max-width: 600px) {
@@ -131,8 +131,9 @@
         margin-top: 10px;
         display: inline-block;
         justify-content: space-between;
-        height: 450px;
-        width: 370px;
+        height: fit-content;
+        width: 100%;
+        margin: 0 auto;
     }
     .newsContainer {
         padding: 0 20px;
@@ -147,7 +148,7 @@
   
   @media only screen and (max-width: 600px) {
     .arrowDownButton {
-      bottom: 50px;
+      bottom: 15px;
       left: 180px;
     }
   }

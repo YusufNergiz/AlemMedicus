@@ -3,7 +3,9 @@
 
 ![](Images/alemmed-mainPage.PNG)
 
-![](Images/alemmed-newsPage.PNG)
+![](Images/alemmed-NewsPage.PNG)
+
+![](Images/alemmed-faqsPage.PNG)
 
 ![](Images/alemmed-adminPage.PNG)
 
